@@ -1,16 +1,18 @@
-import { Box, Card, CardContent, TextField, Typography, Button, Stack } from '@mui/material'
+import { Box, Card, CardContent, TextField, Typography, Button, Stack, formControlLabelClasses, formGroupClasses } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import axios from 'axios'
 
 function Forgot() {
+	const { error, setError } = useState('')
+	const [sent, setSent] = useState(false)
 	const [formFields, setFormFields] = useState({
-		username: '',
 		email: '',
 	})
+	const { email } = formFields
 
 	const navigate = useNavigate()
 
-	const { username, email } = formFields
 
 	const handleChange = (e) => {
 		setFormFields((prevState) => {
@@ -21,7 +23,24 @@ function Forgot() {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 
-		console.log(formFields)
+		const config = {
+			headers: {
+				'Content-Type': 'application/json',
+			}
+		}
+		try{
+			const { data } = await axios.post('http://localhost:3333/api/auth/forgotPassword', { email }, config)
+			//setError('Email has been sent')
+			console.log(data.token)
+			
+			if(data) setSent(true)
+			
+		}catch(err){
+			setError(err.response.data.error)
+			setTimeout(() => {
+				setError('')
+			}, 5000)
+		}
 	}
 
 	const centerBox = {
@@ -38,8 +57,10 @@ function Forgot() {
 		<CardContent>
 			<Stack component='form' onSubmit={handleSubmit} direction='column' spacing={2}>
 				<Typography variant='h4' component='h2' gutterBottom>Forgot Password</Typography>
-				<TextField label='username' type='text' name='username' value={username} onChange={handleChange} />
+				{error !== '' && <Typography variant='body'>{error}</Typography>}
+				{sent && <Typography variant='body'>Password reset email sent</Typography>}
 				<TextField label='email' type='email' name='email' value={email} onChange={handleChange} />
+				{error !== '' && <Typography>{error}</Typography>}
 				<Button type='submit' variant='contained'>Submit</Button>
 			</Stack>
 			<Button onClick={() => navigate('/login')}>Login</Button>
