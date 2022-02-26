@@ -8,6 +8,6 @@ router.post('/login', postLogin)
 
 router.post('/forgotPassword', postForgotPassword)
 
-router.put('/resetPassword', putResetPassword)
+router.put('/resetPassword/:resetToken', putResetPassword)
 
 module.exports = router
