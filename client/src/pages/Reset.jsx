@@ -80,7 +80,7 @@ export default function Reset() {
     <Box sx={centerBox}>
 	<Card>
 		<CardContent>
-			<Stack component='form' onSubmit={handleSubmit} direction='column' spacing={2}>
+			<Stack mb={2} component='form' onSubmit={handleSubmit} direction='column' spacing={2}>
 				<Typography variant='h4' component='h2' gutterBottom>Reset Password</Typography>
 				{error !== '' && <Typography variant='body'>{error}</Typography>}
 				{success && <Typography variant='body'>{message}</Typography>}

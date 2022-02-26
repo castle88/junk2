@@ -4,6 +4,8 @@ const port = process.env.PORT || 3333
 const connectDB = require('./config/database')
 const errorHandler = require('./middleware/errorHandler')
 const authRoutes = require('./routes/authRoutes')
+const todoRoutes = require('./routes/todoRoutes')
+const { protect } = require('./middleware/auth')
 
 const app = express()
 
@@ -13,6 +15,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.use('/api/auth', authRoutes)
+app.use('/api/todos', protect, todoRoutes)
 
 app.use(errorHandler)
 

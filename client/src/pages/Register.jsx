@@ -55,7 +55,7 @@ function Register() {
     <Box sx={centerBox}>
 	<Card>
 		<CardContent>
-			<Stack component='form' onSubmit={handleSubmit} direction='column' spacing={2}>
+			<Stack mb={2} component='form' onSubmit={handleSubmit} direction='column' spacing={2}>
 				<Typography variant='h4' component='h2' gutterBottom>Register</Typography>
 				{error !== '' && <Typography variant='body'>{error}</Typography>}
 				<TextField label='username' type='text' name='username' value={username} onChange={handleChange} />

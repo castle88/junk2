@@ -56,7 +56,7 @@ function Login() {
     <Box sx={centerBox}>
 	<Card>
 		<CardContent>
-			<Stack component='form' onSubmit={handleSubmit} direction='column' spacing={2}>
+			<Stack mb={2} component='form' onSubmit={handleSubmit} direction='column' spacing={2}>
 				<Typography variant='h4' component='h2' gutterBottom>Login</Typography>
 				{error !== '' && <Typography variant='body'>{error}</Typography>}
 				<TextField label='email' type='email' name='email' value={email} onChange={handleChange} />
