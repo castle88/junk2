@@ -3,6 +3,7 @@ require('dotenv').config({ path: './config/.env' })
 const port = process.env.PORT || 3333
 const connectDB = require('./config/database')
 const errorHandler = require('./middleware/errorHandler')
+const authRoutes = require('./routes/authRoutes')
 
 const app = express()
 
@@ -11,7 +12,7 @@ connectDB()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-
+app.use('/api/auth', authRoutes)
 
 app.use(errorHandler)
 
