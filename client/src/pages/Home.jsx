@@ -2,12 +2,23 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import TodoForm from '../components/TodoForm'
+import TodoList from '../components/TodoList'
+import { Box, Stack } from '@mui/material'
 
 function Home() {
   const [error, setError] = useState('')
   const [privateData, setPrivateData] = useState('')
 
   const navigate = useNavigate()
+
+  const pageStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    backgroundColor: 'hsl(0, 0%, 50%)'
+  }
 
   useEffect(() => {
     if(!localStorage.getItem('authtoken')) navigate('/login')
@@ -32,9 +43,17 @@ function Home() {
 
     fetchPrivateData()
   }, [navigate])
-  if(error) return <div>{error}</div>
+  if(error) {
+    setTimeout(()=>navigate('/login'), 3000)
+    return <div>{error}</div>
+  }
   return (
-    <div>{privateData}</div>
+    <Box sx={pageStyle}>
+      <Stack direction='column'>
+        <TodoList todos={privateData} />
+        <TodoForm />
+      </Stack>
+    </Box>
   )
 }
 
