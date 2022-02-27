@@ -1,5 +1,6 @@
 const express = require('express')
 require('dotenv').config({ path: './config/.env' })
+const path = require('path')
 const port = process.env.PORT || 3333
 const connectDB = require('./config/database')
 const errorHandler = require('./middleware/errorHandler')
@@ -13,11 +14,16 @@ connectDB()
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(express.static(path.resolve('client', 'build')))
 
 app.use('/api/auth', authRoutes)
 app.use('/api/todos', protect, todoRoutes)
 
 app.use(errorHandler)
+
+app.get('*', (req, res)=> {
+	res.sendFile(path.resolve('client', 'build', 'index.thml'))
+})
 
 const server = app.listen(port, () => console.log(`Server running port: ${port}`))
 
