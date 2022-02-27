@@ -22,7 +22,6 @@ export default function TodoForm({ setTodos }) {
 			}, config)
 			
 			if(data.success) {
-				console.log(data)
 				setTodo('')
 				setTodos((prev) => setTodos([...prev, data.todo]))
 				setSuccess(data.message)

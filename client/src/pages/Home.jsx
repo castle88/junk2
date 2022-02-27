@@ -53,7 +53,7 @@ function Home() {
   return (
     <Box sx={pageStyle}>
       <Stack direction='column'>
-        {todos.length > 0 && <TodoList todos={todos} />}
+        {todos.length > 0 && <TodoList todos={todos} setTodos={setTodos} />}
         <TodoForm setTodos={setTodos} />
       </Stack>
     </Box>

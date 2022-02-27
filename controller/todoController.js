@@ -40,13 +40,23 @@ module.exports = {
 	},
 	deleteTodo: async (req, res, next) => {
 		const { username, _id, email } = req.user
-		const { newTodo } = req.body
-		console.log(newTodo)
+		const todo = req.params.id
 		try{
+			await Todo.findOneAndDelete({user: _id, _id: todo })
 			res.status(200).json({
-				username,
-				id: _id,
-				email
+				todo,
+			})
+		}catch(err){
+			next(err)
+		}
+	},
+	putTodo: async (req, res, next) => {
+		const { _id } = req.user 
+		const { todo } = req.body
+		try{
+			await Todo.findOneAndUpdate({ _id: todo._id }, { complete: `${todo.complete == false ? true : false}` })
+			res.status(200).json({
+				todo,
 			})
 		}catch(err){
 			next(err)
