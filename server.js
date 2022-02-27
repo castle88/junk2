@@ -23,7 +23,7 @@ app.use('/api/todos', protect, todoRoutes)
 
 app.use(errorHandler)
 
-app.get('*', (req, res)=> {
+app.get('/', (req, res)=> {
 	res.sendFile(path.resolve('client', 'build', 'index.html'))
 })
 
