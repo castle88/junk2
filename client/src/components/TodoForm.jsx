@@ -2,14 +2,10 @@ import { Card, CardContent, TextField, Button, Stack, Typography } from '@mui/ma
 import { useState } from 'react'
 import axios from 'axios'
 
-export default function TodoForm() {
+export default function TodoForm({ fetch, setFetch }) {
 	const [todo, setTodo] = useState('')
-	const [error, setError] = useState('')
+	const [formError, setFormError] = useState('')
 	const [success, setSuccess] = useState('')
-
-	const handleChange = (e) => {
-		setTodo(e.target.value)
-	}
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
@@ -27,14 +23,19 @@ export default function TodoForm() {
 			
 			if(data.success) {
 				setTodo('')
+				setFetch(!fetch)
 				setSuccess(data.message)
 				setTimeout(() => setSuccess(''), 3000)
 			}
 		}catch(err){
 			console.log(err)
-			setError('error submitting todo')
-			setTimeout(() => setError(''), 3000)
+			setFormError('error submitting todo')
+			setTimeout(() => setFormError(''), 3000)
 		}
+	}
+
+	const handleChange = (e) => {
+		setTodo(e.target.value)
 	}
 
   return (
@@ -42,7 +43,7 @@ export default function TodoForm() {
 	<CardContent>
 		<Stack direction='column' spacing={2} component='form' onSubmit={handleSubmit}>
 			<Typography variant='h4' component='h2'>Create a new Todo</Typography>
-			{error !== '' && <Typography variant='body'>{error}</Typography>}
+			{formError !== '' && <Typography variant='body'>{formError}</Typography>}
 			{success !== '' && <Typography variant='body'>{success}</Typography>}
 			<TextField name='todo' type='text' label='todo' placeholder='Enter a new Todo' value={todo} onChange={handleChange} />
 			<Button type='submit' variant='contained'>Submit</Button>
