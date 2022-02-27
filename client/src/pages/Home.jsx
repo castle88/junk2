@@ -8,7 +8,7 @@ import { Box, Stack } from '@mui/material'
 
 function Home() {
   const [error, setError] = useState('')
-  const [privateData, setPrivateData] = useState('')
+  const [todos, setTodos] = useState([])
 
   const navigate = useNavigate()
 
@@ -33,7 +33,7 @@ function Home() {
       try{
         const { data } = await axios.get('http://localhost:3333/api/todos/', config)
         
-        setPrivateData(data.username)
+        if(data.success) setTodos((prev) => [...prev, ...data.todos])
       }catch(err){
         console.log(err)
         localStorage.removeItem('authtoken')
@@ -50,7 +50,7 @@ function Home() {
   return (
     <Box sx={pageStyle}>
       <Stack direction='column'>
-        <TodoList todos={privateData} />
+        {todos.length > 0 && <TodoList todos={todos} />}
         <TodoForm />
       </Stack>
     </Box>

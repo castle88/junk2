@@ -1,22 +1,14 @@
-import React from 'react'
-import { Card, CardHeader, Stack, IconButton } from '@mui/material'
-import { DeleteForever, CheckCircle } from '@mui/icons-material/';
+import { Stack } from '@mui/material'
+import TodoItem from './TodoItem'
 
 export default function TodoList({ todos }) {
-
-	const todoAction = <Stack direction='row' spacing={2}>
-		<IconButton color='success'>
-			<CheckCircle />
-		</IconButton>
-		<IconButton color='error'>
-			<DeleteForever />
-		</IconButton>
-	</Stack>
-
+	console.log(todos)
+	console.log(todos[0])
   return (
-    <Card sx={{ mb: 2, maxWidth: 360 }}>
-	<CardHeader title={todos} action={todoAction}>
-	</CardHeader>
-    </Card>
+    <Stack direction="column" spaceing={2}>
+	{todos.map(todo => (
+		<TodoItem key={todo._id + Date.now().toString()} todo={todo} />
+	))}
+    </Stack>
   )
 }

@@ -1,4 +1,4 @@
-import { Card, CardContent, TextField, Button, Box, Stack, Typography } from '@mui/material'
+import { Card, CardContent, TextField, Button, Stack, Typography } from '@mui/material'
 import { useState } from 'react'
 import axios from 'axios'
 
@@ -26,6 +26,7 @@ export default function TodoForm() {
 			}, config)
 			
 			if(data.success) {
+				setTodo('')
 				setSuccess(data.message)
 				setTimeout(() => setSuccess(''), 3000)
 			}
