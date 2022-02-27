@@ -50,7 +50,7 @@ export default function Reset() {
 			}
 			try{
 				
-				const { data } = await axios.put(`http://localhost:3333/api/auth/resetPassword/${resetToken}`, { password }, config)
+				const { data } = await axios.put(`https://listtodomern.herokuapp.com/api/auth/resetPassword/${resetToken}`, { password }, config)
 				
 				console.log(data)
 				setSuccess(data.success)

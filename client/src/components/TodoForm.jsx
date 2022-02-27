@@ -17,7 +17,7 @@ export default function TodoForm({ setTodos }) {
 			}
 		}
 		try{
-			const { data } = await axios.post('http://localhost:3333/api/todos/create', {
+			const { data } = await axios.post('https://listtodomern.herokuapp.com/api/todos/create', {
 				newTodo: todo,
 			}, config)
 			

@@ -29,7 +29,7 @@ function Forgot() {
 			}
 		}
 		try{
-			const { data } = await axios.post('http://localhost:3333/api/auth/forgotPassword', { email }, config)
+			const { data } = await axios.post('https://listtodomern.herokuapp.com/api/auth/forgotPassword', { email }, config)
 			//setError('Email has been sent')
 			console.log(data.token)
 			

@@ -30,7 +30,7 @@ function Register() {
 			}
 		}
 		try{
-			const { data } = await axios.post('http://localhost:3333/api/auth/register', formFields, config)
+			const { data } = await axios.post('https://listtodomern.herokuapp.com/api/auth/register', formFields, config)
 
 			localStorage.setItem('authtoken', data.token)
 			

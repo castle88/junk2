@@ -12,7 +12,7 @@ export default function TodoItem({ todo, todos, setTodos }) {
 			}
 		}
 		try{
-			const { data } = await axios.delete(`http://localhost:3333/api/todos/delete/${todo._id}`, config)
+			const { data } = await axios.delete(`https://listtodomern.herokuapp.com/api/todos/delete/${todo._id}`, config)
 
 			setTodos((prev) => {
 				const newTodos = prev.filter(x => x._id !== data.todo)
@@ -31,7 +31,7 @@ export default function TodoItem({ todo, todos, setTodos }) {
 			}
 		}
 		try{
-			const { data } = await axios.put(`http://localhost:3333/api/todos/update`, { todo }, config)
+			const { data } = await axios.put(`https://listtodomern.herokuapp.com/api/todos/update`, { todo }, config)
 			
 			setTodos((prev) => {
 				const newTodos = prev.map(x => x._id === todo._id ? { ...todo, complete: !todo.complete } : x)

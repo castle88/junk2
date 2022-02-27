@@ -30,7 +30,7 @@ function Login() {
 		}
 		try{
 			const { data } = await axios.post(
-				'http://localhost:3333/api/auth/login', formFields, config
+				'https://listtodomern.herokuapp.com/api/auth/login', formFields, config
 			)
 
 			localStorage.setItem('authtoken', data.token)
@@ -56,7 +56,7 @@ function Login() {
     <Box sx={centerBox}>
 	<Card>
 		<CardContent>
-			<Stack mb={2} component='form' onSubmit={handleSubmit} direction='column' spacing={2}>
+			<Stack component='form' onSubmit={handleSubmit} direction='column' spacing={2}>
 				<Typography variant='h4' component='h2' gutterBottom>Login</Typography>
 				{error !== '' && <Typography variant='body'>{error}</Typography>}
 				<TextField label='email' type='email' name='email' value={email} onChange={handleChange} />

@@ -29,7 +29,7 @@ function Home() {
       }
     } 
     try{
-      const { data } = await axios.get('http://localhost:3333/api/todos/', config)
+      const { data } = await axios.get('https://listtodomern.herokuapp.com/api/todos/', config)
       
       if(data.success) setTodos((prev) => setTodos([...prev, ...data.todos]))
     }catch(err){
