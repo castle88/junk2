@@ -54,7 +54,7 @@ function Home() {
     <Box sx={pageStyle}>
       <Stack direction='column'>
         {todos.length > 0 && <TodoList todos={todos} />}
-        <TodoForm fetch={fetch} setFetch={setFetch} />
+        <TodoForm setTodos={setTodos} />
       </Stack>
     </Box>
   )

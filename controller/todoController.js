@@ -23,7 +23,7 @@ module.exports = {
 		const { username, _id, email } = req.user
 		const { newTodo } = req.body
 		try{
-			await Todo.create({
+			const todo = await Todo.create({
 				user: _id,
 				todo: newTodo,
 				complete: false
@@ -31,7 +31,8 @@ module.exports = {
 
 			res.status(200).json({
 				success: true,
-				message: 'Todo successfully submitted'
+				message: 'Todo successfully submitted',
+				todo,
 			})
 		}catch(err){
 			next(err)

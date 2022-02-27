@@ -2,7 +2,7 @@ import { Card, CardContent, TextField, Button, Stack, Typography } from '@mui/ma
 import { useState } from 'react'
 import axios from 'axios'
 
-export default function TodoForm({ fetch, setFetch }) {
+export default function TodoForm({ setTodos }) {
 	const [todo, setTodo] = useState('')
 	const [formError, setFormError] = useState('')
 	const [success, setSuccess] = useState('')
@@ -22,8 +22,9 @@ export default function TodoForm({ fetch, setFetch }) {
 			}, config)
 			
 			if(data.success) {
+				console.log(data)
 				setTodo('')
-				setFetch(!fetch)
+				setTodos((prev) => setTodos([...prev, data.todo]))
 				setSuccess(data.message)
 				setTimeout(() => setSuccess(''), 3000)
 			}
