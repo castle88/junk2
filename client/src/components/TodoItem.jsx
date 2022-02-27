@@ -32,7 +32,7 @@ export default function TodoItem({ todo, todos, setTodos }) {
 		}
 		try{
 			const { data } = await axios.put(`http://localhost:3333/api/todos/update`, { todo }, config)
-			console.log(data)
+			
 			setTodos((prev) => {
 				const newTodos = prev.map(x => x._id === todo._id ? { ...todo, complete: !todo.complete } : x)
 				return newTodos
